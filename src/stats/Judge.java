@@ -37,7 +37,7 @@ public class Judge {
 		Color newColor = Color.BLUE;
 		
 		if (miss < 3) {
-			bc = 1.5;
+			bc = 1;
 			sc = 69;
 			numNotesHit += 1;
 			newColor = Color.GREEN;
@@ -54,17 +54,17 @@ public class Judge {
 			newColor = Color.RED;
 		}
 		else if (miss < 11) {
-			bc = -.5;
+			bc = -1;
 			sc = -15; // ...1...1...1...freshman.
 		}
 		else {
-			bc = -.6;
+			bc = -2;
 			sc = -34; // Jeff
 		}
 
 		// Don't increase boneage as much toward the ends of longer notes
 		// It's not much of a challenge
-		boneage += bc / 2 * ((currentBeat - startBeat) + .001) ;
+		boneage += bc / ((currentBeat - startBeat) + .001);
 		if (boneage < 0) boneage = 0;
 		else if (boneage > 90) {
 			sc *= 5;
