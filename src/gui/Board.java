@@ -79,13 +79,9 @@ public class Board extends JPanel implements ActionListener{
 		//System.out.println(visibleNotes.size());
 		for (GuiNote n : visibleNotes) {
 			//System.out.println("")
-			if (n.highlight) {
-				g2.setColor(Color.YELLOW);
-			} else {
-				g2.setColor(Color.RED);
-			}
+			g2.setColor(n.color);
 			int x = (int) (n.x_center * (w - staff_line) - note_circle_radius);
-			int y = map_slidepos_to_screen_pos(n.position, h) - note_circle_radius;
+			int y = map_slidepos_to_screen_pos(n.note.position, h) - note_circle_radius;
 			g2.fillOval(x, y, 2*note_circle_radius, 2*note_circle_radius);
 			if (n.note.duration > 0.9) g2.drawRoundRect(x, y, (int) (n.right_side*(w - staff_line)), 2*note_circle_radius, roundrect_arc_len, roundrect_arc_len);
 			g2.drawString(n.note.name, x + note_circle_radius, y - 5);

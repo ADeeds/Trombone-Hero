@@ -76,12 +76,6 @@ public class SongPlayer {
 				}
 				double start_minus_cur = n.note.startBeat - currentBeat;
 				n.x_center = (start_minus_cur)/previewBeats;
-				if (n.x_center < 0.25 && 
-						n.note.startBeat + n.note.duration - currentBeat > 0.25) {
-					n.setHighlight(true);
-				} else {
-					n.setHighlight(false);
-				}
 			}
 
 		}

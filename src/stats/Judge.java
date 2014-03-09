@@ -23,7 +23,7 @@ public class Judge {
 	
 	/** Given the currently-expected note, updates score and boneage */
 	public void assess(GuiNote n, double currentBeat) {
-		int miss = SlideStats.getPositionDistance(n.position, board.slide.getPosition());
+		int miss = SlideStats.getPositionDistance(n.note.position, board.slide.getPosition());
 		n.color = assignPointsFor(miss, currentBeat);
 		beatOfLastUpdate = currentBeat;
 	}
