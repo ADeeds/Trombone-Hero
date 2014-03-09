@@ -23,9 +23,19 @@ public class Note {
 	/** The length of the note in beats */
 	public float duration;
 
-	Note(Position pos, float start, float dur) {
+	private void set(String n, Position pos, float start, float dur) {
+		this.name = n;
 		this.position = pos;
 		this.startTime = start;
 		this.duration = dur;
+	}
+	
+	Note(String n, Position pos, float start, float dur) {
+		set(n, pos, start, dur);
+	}
+
+	Note(String n, Position pos, int oct, float start, float dur) {
+		set(n, pos, start, dur);
+		this.octave = oct;
 	}
 }
