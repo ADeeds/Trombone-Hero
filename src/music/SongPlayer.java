@@ -65,6 +65,9 @@ public class SongPlayer {
 		}
 	}
 	
+	/** Advances currentBeat to the realtime-determined time elapsed to avoid
+	 *  timer drift. Called by gui/Board
+	 */
 	public void advanceToTime(long tot_elapsed) {
 		currentBeat = (song.tempo * tot_elapsed / (60.0 * 1000.0)) - previewBeats;
 		addToVisibleNotes();
