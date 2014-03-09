@@ -6,11 +6,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -33,7 +35,10 @@ public class Board extends JPanel implements ActionListener{
 	float current_beat = -8;
 	long frame = 0;
 	SlideGetter slide;
-
+	ImageIcon bellcon = new ImageIcon("res/bell.png");
+	ImageIcon inslide = new ImageIcon("res/inslide.png");
+	ImageIcon outslide = new ImageIcon("res/outslide.png");
+	
 	public void setSlideGetter(SlideGetter s) {
 		slide = s;
 	}
@@ -68,10 +73,14 @@ public class Board extends JPanel implements ActionListener{
 				RenderingHints.VALUE_RENDER_QUALITY);
 
 		g2.setRenderingHints(rh);
-
 		Dimension size = getSize();
-		double w = size.getWidth();
-		double h = size.getHeight();
+		int w = (int)size.getWidth();
+		int h = (int)size.getHeight();
+		//System.out.println(w + "\t" + h);
+		g2.drawImage(inslide.getImage(), 0,100, 200, h - 100, null);
+		g2.drawImage(outslide.getImage(), 0,100, 200, h - 100, null);
+		g2.drawImage(bellcon.getImage(), 0,h - 200, 200, 200, null);
+		/*
 		Ellipse2D e = new Ellipse2D.Double(0, 0, 80, 130);
 		g2.setStroke(new BasicStroke(1));
 		g2.setColor(Color.gray);
@@ -80,7 +89,7 @@ public class Board extends JPanel implements ActionListener{
 					AffineTransform.getTranslateInstance(w / 2, h / 2);
 			at.rotate(Math.toRadians(deg));
 			g2.draw(at.createTransformedShape(e));
-		}
+		}*/
 		g2.setColor(Color.YELLOW);
 		g2.fillRect(150, 5, 200 * boneage / 100, 17);
 		g2.setColor(Color.RED);
