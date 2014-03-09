@@ -36,7 +36,6 @@ public class Board extends JPanel implements ActionListener{
 	private final int DELAY = 20;
 	private Song song;
 	private long start_time = 0;
-	float current_beat = -8;
 	long frame = 0;
 	SlideGetter slide;
 	ImageIcon bellcon = new ImageIcon("res/bell.png");
@@ -108,9 +107,7 @@ public class Board extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		long cur_time = System.currentTimeMillis();
-		current_beat = (song.tempo * (cur_time - start_time) / (60f * 1000)) - 8f;
-		player.updateCurrentBeat(current_beat);
-		System.out.println("Current beat: "  + current_beat);
+		player.advanceToTime(cur_time - start_time);
 		if (slide != null) {
 			System.out.println("Pos: " + slide.getPosition());
 		}

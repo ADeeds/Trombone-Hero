@@ -40,15 +40,7 @@ public class SongPlayer {
 			currentBeat = -previewBeats;
 			currentNoteIndex = 0;
 		}
-		state = State.PLAYING;
-		
-		// Draw upcoming notes
-		while (currentBeat < song.num_beats) {
-			addToVisibleNotes();
-			advanceNotes();
-			currentBeat += beatInterval;
-		}
-		state = State.DONE;	
+		state = State.PLAYING;	
 	}
 	
 	/** Adds all notes for which startBeat < currentBeat + previewLength
@@ -72,5 +64,11 @@ public class SongPlayer {
 				visibleNotes.remove(n);
 			}
 		}
+	}
+	
+	public void advanceToTime(long tot_elapsed) {
+		currentBeat = (song.tempo * tot_elapsed / (60f * 1000)) - previewBeats;
+		addToVisibleNotes();
+		advanceNotes();
 	}
 }
