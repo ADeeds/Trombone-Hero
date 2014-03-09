@@ -46,16 +46,15 @@ public class Board extends JPanel implements ActionListener{
 		slide = s;
 	}
 	public Board(Song s) {
-		initBoard();
 		song = s;
+		initBoard();
 	}
 	private void initBoard() {
+		player = new SongPlayer(song);
 
 		setBackground(Color.BLACK);
 
 		setDoubleBuffered(true);
-
-		player = new SongPlayer(song);
 
 		timer = new Timer(DELAY, this);
 		start_time = System.currentTimeMillis();
@@ -81,10 +80,16 @@ public class Board extends JPanel implements ActionListener{
 		int w = (int)size.getWidth();
 		int h = (int)size.getHeight();
 		//System.out.println(w + "\t" + h);
-		g2.drawImage(inslide.getImage(), 0,bone_offset, 200, h - bone_offset, null);
+		g2.setColor(Color.GRAY);
+		for(int i = 1; i < 8; i++) {
+			//First pos is 275 pixels tall
+			int height = (int) (h - 2.6 * (SlideStats.getFirstOffset(SlideStats.PositionDistances[i])) + 275);
+			g2.drawLine(0,height, w, height);
+		}
+		g2.drawImage(inslide.getImage(), 0,bone_offset, w/4, h - bone_offset, null);
 		g2.drawImage(outslide.getImage(), 0,(int)
-				(bone_offset - 2.6 * SlideStats.getNearestSlidePosition(slide.getPosition())), 200, h - bone_offset, null);
-		g2.drawImage(bellcon.getImage(), 0,bone_offset, 200, h - bone_offset, null);
+				(bone_offset - 2.6 * SlideStats.getFirstOffset(slide.getPosition())), w/4, h - bone_offset, null);
+		g2.drawImage(bellcon.getImage(), 0,bone_offset, w/4, h - bone_offset, null);
 		/*
 		Ellipse2D e = new Ellipse2D.Double(0, 0, 80, 130);
 		g2.setStroke(new BasicStroke(1));
@@ -101,7 +106,6 @@ public class Board extends JPanel implements ActionListener{
 		g.setFont(new Font("Comic Sans MS", Font.BOLD, 24)); 
 		g2.drawString("BONEAGE:", 10, 22);
 		g2.drawRect(150, 5, 200, 17);
-
 	}
 
 	@Override

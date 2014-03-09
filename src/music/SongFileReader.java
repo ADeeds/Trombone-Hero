@@ -39,7 +39,7 @@ public class SongFileReader {
 				String line = sc.nextLine();
 				if(line.length() > 0) notes.add(parse_note(line));
 			}
-			s = new Song(title, tempo, length, numnotes);
+			s = new Song(title, tempo, length, numnotes, notes);
 			sc.close();
 		} catch (FileNotFoundException e) {}
 		return s;

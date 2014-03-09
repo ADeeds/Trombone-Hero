@@ -14,10 +14,11 @@ public class Song {
 	/** List of Notes */
 	ArrayList<Note> notes;
 	
-	Song(String title, int tempo, int num_beats, int num_notes) {
+	Song(String title, int tempo, int num_beats, int num_notes, ArrayList<Note> notes) {
 		this.title = title;
 		this.tempo = tempo;
 		this.num_beats = num_beats;
 		this.num_notes = num_notes;
+		this.notes = notes;
 	}
 }
