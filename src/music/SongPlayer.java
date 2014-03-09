@@ -33,14 +33,13 @@ public class SongPlayer {
 
 	public Judge judge;
 
-
 	private Song song;
 
 	public SongPlayer(Board board, Song song) {
 		this.board = board;
 		this.song = song;
 		this.state = State.STOPPED;
-		this.judge = new Judge(board);
+		this.judge = new Judge(board, this);
 	}
 
 	/** Used to play from beginning or resume from paused */
@@ -69,16 +68,16 @@ public class SongPlayer {
 
 	/** Moves all notes towards current line */
 	private void advanceNotes() {
-		System.out.println("Num visible:" + visibleNotes.size());
 		for (int i = 0; i < visibleNotes.size(); i++) {
 			GuiNote n = visibleNotes.get(i);
-			if (n.note.startBeat <= currentBeat) {
-				judgeMeOn(n.note);
-			}
 			if (currentBeat > n.note.startBeat + n.note.duration + postviewBeats) {
 				visibleNotes.remove(n);
+				continue;
 			}
 			else {
+				if (n.note.startBeat <= currentBeat) {
+					judgeMeOn(n.note);
+				}
 				double start_minus_cur = n.note.startBeat - currentBeat;
 				n.x_center = (start_minus_cur)/previewBeats;
 				if (n.x_center < 0.25 && 
@@ -88,6 +87,7 @@ public class SongPlayer {
 					n.setHighlight(false);
 				}
 			}
+
 		}
 	}
 
@@ -108,6 +108,6 @@ public class SongPlayer {
 	/** Causes Judge to recalculate score, boneage, etc. based on current performance */
 
 	private void judgeMeOn(Note n) {
-
+		judge.assess(n);
 	}
 }

@@ -1,12 +1,10 @@
 package gui;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +32,7 @@ public class Board extends JPanel implements ActionListener{
 	private Song song;
 	private long start_time = 0;
 	long frame = 0;
-	SlideGetter slide;
+	public SlideGetter slide;
 	ImageIcon bellcon = new ImageIcon("res/bell.png");
 	ImageIcon inslide = new ImageIcon("res/inslide.png");
 	ImageIcon outslide = new ImageIcon("res/outslide.png");
@@ -77,7 +75,7 @@ public class Board extends JPanel implements ActionListener{
 		int w = (int)size.getWidth();
 		int h = (int)size.getHeight();
 		int staff_line = w/5;
-		ArrayList<GuiNote> visibleNotes = (ArrayList<GuiNote>) player.getVisibleGuiNotes().clone();
+		ArrayList<GuiNote> visibleNotes = (ArrayList<GuiNote>) player.getVisibleGuiNotes();
 		//System.out.println(visibleNotes.size());
 		for (GuiNote n : visibleNotes) {
 			//System.out.println("")
@@ -88,8 +86,8 @@ public class Board extends JPanel implements ActionListener{
 			}
 			int x = (int) (n.x_center * (w - staff_line) - note_circle_radius);
 			int y = map_slidepos_to_screen_pos(n.position, h) - note_circle_radius;
-			g2.drawOval(x, y, 2*note_circle_radius, 2*note_circle_radius);
-			if (n.note.duration > 0.9) g2.drawRoundRect(x, y, (int) (n.right_side*(w - staff_line)), 2*note_circle_radius, 15, 15);
+			g2.fillOval(x, y, 2*note_circle_radius, 2*note_circle_radius);
+			if (n.note.duration > 0.9) g2.drawRoundRect(x, y, (int) (n.right_side*(w - staff_line)), 2*note_circle_radius, roundrect_arc_len, roundrect_arc_len);
 			g2.drawString(n.note.name, x + note_circle_radius, y - 5);
 		}
 
@@ -116,13 +114,14 @@ public class Board extends JPanel implements ActionListener{
 			g2.draw(at.createTransformedShape(e));
 		}*/
 		g2.setColor(Color.WHITE);
-		g2.drawLine(w/5 + 4, 0, w/5 + 4, h);
+		g2.drawLine(w/5 + 4, h/4, w/5 + 4, h*5/4);
 		g2.setColor(Color.YELLOW);
-		g2.fillRect(150, 5, 200 * player.judge.boneage / 100, 17);
+		g2.fillRect(150, 5, (int)(player.judge.boneage / 100) * (w/4), 17);
 		g2.setColor(Color.RED);
 		g.setFont(new Font("Comic Sans MS", Font.BOLD, 24)); 
 		g2.drawString("BONEAGE:", 10, 22);
-		g2.drawRect(150, 5, 200, 17);
+		g2.drawString("Score: " + player.judge.score, w*8/10, 22);
+		g2.drawRect(150, 5, w/4, 17);
 	}
 
 	@Override
