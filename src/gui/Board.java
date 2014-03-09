@@ -63,14 +63,14 @@ public class Board extends JPanel implements ActionListener{
 
 		Graphics2D g2 = (Graphics2D) g;
 
-		RenderingHints rh =
+		/*RenderingHints rh =
 				new RenderingHints(RenderingHints.KEY_ANTIALIASING,
 						RenderingHints.VALUE_ANTIALIAS_ON);
 
 		rh.put(RenderingHints.KEY_RENDERING,
 				RenderingHints.VALUE_RENDER_QUALITY);
 
-		g2.setRenderingHints(rh);
+		g2.setRenderingHints(rh);*/
 		Dimension size = getSize();
 		int w = (int)size.getWidth();
 		int h = (int)size.getHeight();
@@ -99,16 +99,7 @@ public class Board extends JPanel implements ActionListener{
 		g2.drawImage(outslide.getImage(), 0,(int)
 				(bone_offset - h/150 * SlideStats.getFirstOffset(slide.getPosition())), w/4, h - bone_offset, null);
 		g2.drawImage(bellcon.getImage(), 0,(int)(bone_offset - (h * 0.2)), w/4, (int)(1.2*h - bone_offset), null);
-		/*
-		Ellipse2D e = new Ellipse2D.Double(0, 0, 80, 130);
-		g2.setStroke(new BasicStroke(1));
-		g2.setColor(Color.gray);
-		for (double deg = 0; deg < 360; deg += 5) {
-			AffineTransform at =
-					AffineTransform.getTranslateInstance(w / 2, h / 2);
-			at.rotate(Math.toRadians(deg));
-			g2.draw(at.createTransformedShape(e));
-		}*/
+
 		g2.setColor(Color.WHITE);
 		g2.drawLine(w/5 + 4, h/4, w/5 + 4, h*5/4);
 		g2.setColor(Color.YELLOW);

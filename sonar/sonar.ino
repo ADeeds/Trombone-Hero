@@ -4,7 +4,7 @@
 #define trigPin 8 // Trigger Pin
 #define LEDPin 13 // Onboard LED
 
-#define buffer_size 8
+#define buffer_size 10
 
 int maximumRange = 200; // Maximum range needed
 int minimumRange = 0; // Minimum range needed
@@ -60,5 +60,5 @@ void loop() {
  }
  
  //Delay 50ms before next reading.
- delay(8);
+ delay(10);
 }
