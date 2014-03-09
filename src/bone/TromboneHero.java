@@ -25,6 +25,9 @@ public class TromboneHero {
 	
 	TromboneHero() {
 		System.out.println("TROMBONE HERO!!!!!!!!");
+		SlideGetter slider = new SlideGetter();
+		Thread slidethread = new Thread(slider);
+		slidethread.start();
 		GameFrame frame = new GameFrame();
 		
 

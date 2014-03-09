@@ -17,15 +17,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import music.Song;
+
 public class Board extends JPanel implements ActionListener{
 
 	ArrayList<ImageIcon> icons = new ArrayList<ImageIcon>();
     private Timer timer;
 
     private final int DELAY = 20;
+    private Song song;
+    private long start_time = 0;
+    float current_beat = -8;
     
-    public Board() {
+    public Board(Song s) {
     	initBoard();
+    	song = s;
     }
 	private void initBoard() {
 
@@ -35,6 +41,8 @@ public class Board extends JPanel implements ActionListener{
 
 
 		timer = new Timer(DELAY, this);
+		start_time = System.currentTimeMillis();
+
 		timer.start();
 	}
 
@@ -73,7 +81,9 @@ public class Board extends JPanel implements ActionListener{
 	
 	   @Override
 	    public void actionPerformed(ActionEvent e) {
-		   
-	        repaint();  
+		   long cur_time = System.currentTimeMillis();
+		   current_beat = (song.tempo * (cur_time - start_time) / (60f * 1000)) - 8f;
+		   System.out.println("Current beat: "  + current_beat);
+		   repaint();  
 	    }
 }

@@ -34,7 +34,7 @@ public class GameFrame {
 		    			System.out.println(song.title + " is loaded");
 		    			frame.remove((Component) arg0.getSource());
 		    			frame.repaint();
-		    			Board b = new Board();
+		    			Board b = new Board(song);
 		    			b.setSize(frame.getWidth(), frame.getHeight());
 		    			frame.add(b);
 
