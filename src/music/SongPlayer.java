@@ -71,7 +71,13 @@ public class SongPlayer {
 	 */
 	public void advanceToTime(long tot_elapsed) {
 		currentBeat = (song.tempo * tot_elapsed / (60f * 1000)) - previewBeats;
+		judgeMe();
 		addToVisibleNotes();
 		advanceNotes();
+	}
+	
+	/** Causes Judge to recalculate score, boneage, etc. based on current performance */
+	private void judgeMe() {
+		
 	}
 }
