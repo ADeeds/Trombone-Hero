@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class SongPlayer {
 
 	/** Number of beats to "look ahead" */
-	private static float previewBeats = 16;
+	private static float previewBeats = 12;
 	/** Number of beats for which to keep passed notes visible */
 	private static float postviewBeats = 2;
 
@@ -48,11 +48,10 @@ public class SongPlayer {
 	 */
 	private void addToVisibleNotes() {
 		while (currentNoteIndex < song.notes.size() &&
-				currentBeat + previewBeats <= song.notes.get(currentNoteIndex).startBeat) {
+				currentBeat + previewBeats >= song.notes.get(currentNoteIndex).startBeat) {
 			GuiNote guinote = new GuiNote(song.notes.get(currentNoteIndex), 
 					1, Note.noteToPos(song.notes.get(currentNoteIndex).name));
 			visibleNotes.add(guinote);
-			
 			currentNoteIndex++;
 		}
 	}
@@ -82,6 +81,7 @@ public class SongPlayer {
 	 */
 	public void advanceToTime(long tot_elapsed) {
 		currentBeat = (song.tempo * tot_elapsed / (60.0 * 1000.0)) - previewBeats;
+		System.out.println("Cur beat: " + currentBeat);
 		judgeMe();
 		addToVisibleNotes();
 		advanceNotes();
