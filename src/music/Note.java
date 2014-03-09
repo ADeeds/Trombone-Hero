@@ -24,9 +24,4 @@ public class Note {
 		this.startTime = start;
 		this.duration = dur;
 	}
-	
-	/** Assigns note name (probably called later) */
-	void setName(String n) {
-		this.name = n;
-	}
 }
