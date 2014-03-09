@@ -28,7 +28,7 @@ public class SongPlayer {
 	/** State of SongPlayer */
 	private enum State { STOPPED, PLAYING, PAUSED, DONE }
 	public State state;
-	
+
 	public Judge judge;
 
 	private Song song;
@@ -65,16 +65,15 @@ public class SongPlayer {
 
 	/** Moves all notes towards current line */
 	private void advanceNotes() {
-		System.out.println("Num visible:" + visibleNotes.size());
 		for (int i = 0; i < visibleNotes.size(); i++) {
 			GuiNote n = visibleNotes.get(i);
-			if (n.note.startBeat <= currentBeat) {
-				judgeMeOn(n.note);
-			}
 			if (currentBeat > n.note.startBeat + n.note.duration + postviewBeats) {
 				visibleNotes.remove(n);
 			}
 			else {
+				if (n.note.startBeat <= currentBeat && n.note.startBeat + n.note.duration > currentBeat) {
+					judgeMeOn(n);
+				}
 				double start_minus_cur = n.note.startBeat - currentBeat;
 				n.x_center = (start_minus_cur)/previewBeats;
 				if (n.x_center < 0.25 && 
@@ -84,6 +83,7 @@ public class SongPlayer {
 					n.setHighlight(false);
 				}
 			}
+
 		}
 	}
 
@@ -103,7 +103,7 @@ public class SongPlayer {
 
 	/** Causes Judge to recalculate score, boneage, etc. based on current performance */
 
-	private void judgeMeOn(Note n) {
+	private void judgeMeOn(GuiNote n) {
 		judge.assess(n, currentBeat);
 	}
 }
