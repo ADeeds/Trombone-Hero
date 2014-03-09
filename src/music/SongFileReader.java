@@ -23,12 +23,11 @@ public class SongFileReader {
 			System.out.println("Note has too many parameters!");
 		}
 		System.out.println("Note " + name + " starts at " + start_beat + " and lasts for " + length + " beats");
-		
 	}
 	
 	Song parse() {
 		Song s = null;
-		ArrayList<Note> notes;
+		ArrayList<Note> notes = new ArrayList<Note>();
 		try {
 			//BufferedReader reader = new BufferedReader(new FileReader(filename));
 			Scanner sc = new Scanner(new File(filename));
@@ -36,13 +35,13 @@ public class SongFileReader {
 			int tempo = sc.nextInt();
 			int length = sc.nextInt();
 			int numnotes = sc.nextInt();
-			ArrayList<Note> notes = new ArrayList<Note>();
 			for(int i = 0; i < numnotes; i++) {
 				String line = sc.nextLine();
 				notes.add(parse_note(line));
 			}
 			s = new Song(title, tempo, length, numnotes);
+			sc.close();
 		} catch (FileNotFoundException e) {}
-		
+		return s;
 	}
 }
