@@ -53,7 +53,7 @@ public class Board extends JPanel implements ActionListener{
 
 		timer = new Timer(DELAY, this);
 		start_time = System.currentTimeMillis();
-
+		player.play();
 		timer.start();
 	}
 

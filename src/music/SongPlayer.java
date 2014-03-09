@@ -35,16 +35,13 @@ public class SongPlayer {
 	public State state;
 
 	public Judge judge;
-	File songfile;
 	private Song song;
 
 	public SongPlayer(Board board, Song song) {
 		this.song = song;
 		this.state = State.STOPPED;
 		this.judge = new Judge(board, this);
-		if (song.title.contains("tribute")) {
-			songfile = new File("res/tribute.mp3");
-		}
+
 	}
 
 	/** Used to play from beginning or resume from paused */
@@ -52,23 +49,6 @@ public class SongPlayer {
 		if (state != State.PAUSED) {
 			currentBeat = -previewBeats;
 			currentNoteIndex = 0;
-			if (songfile != null) {
-				try {
-					playClip(songfile);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (UnsupportedAudioFileException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (LineUnavailableException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
 		}
 		state = State.PLAYING;	
 	}
@@ -106,38 +86,6 @@ public class SongPlayer {
 		}
 	}
 
-	private static void playClip(File clipFile) throws IOException, 
-	  UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
-	  class AudioListener implements LineListener {
-	    private boolean done = false;
-	    @Override public synchronized void update(LineEvent event) {
-	      Type eventType = event.getType();
-	      if (eventType == Type.STOP || eventType == Type.CLOSE) {
-	        done = true;
-	        notifyAll();
-	      }
-	    }
-	    public synchronized void waitUntilDone() throws InterruptedException {
-	      while (!done) { wait(); }
-	    }
-	  }
-	  AudioListener listener = new AudioListener();
-	  AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(clipFile);
-	  try {
-	    Clip clip = AudioSystem.getClip();
-	    clip.addLineListener(listener);
-	    clip.open(audioInputStream);
-	    try {
-	      clip.start();
-	      listener.waitUntilDone();
-	    } finally {
-	      clip.close();
-	    }
-	  } finally {
-	    audioInputStream.close();
-	  }
-	}
-	
 	public  ArrayList<GuiNote> getVisibleGuiNotes() {
 		return visibleNotes;
 	}
