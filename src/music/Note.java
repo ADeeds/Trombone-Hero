@@ -1,9 +1,6 @@
 package music;
-/** Note represents a single instance of a pitch being played 
- * 
- * @author Chase
- *
- */
+
+/** Note represents a single instance of a pitch being played */
 public class Note {
 	static Position noteToPos(String name) {
 		if (name.equals("Bb")) return Position.FIRST;
@@ -34,7 +31,7 @@ public class Note {
 	public int octave;
 	
 	/** The starting beat of the note */
-	public float startTime;
+	public float startBeat;
 	
 	/** The length of the note in beats */
 	public float duration;
@@ -42,7 +39,7 @@ public class Note {
 	private void set(String n, Position pos, float start, float dur) {
 		this.name = n;
 		this.position = pos;
-		this.startTime = start;
+		this.startBeat = start;
 		this.duration = dur;
 	}
 	
