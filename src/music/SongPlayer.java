@@ -15,9 +15,9 @@ import stats.Judge;
 public class SongPlayer {
 
 	/** Number of beats to "look ahead" */
-	private static float previewBeats = 12;
+	private static float previewBeats = 8;
 	/** Number of beats for which to keep passed notes visible */
-	private static float postviewBeats = 2;
+	private static float postviewBeats = 4;
 
 	/** Currently visible notes */
 	private ArrayList<GuiNote> visibleNotes = new ArrayList<GuiNote>();
@@ -53,7 +53,7 @@ public class SongPlayer {
 	 */
 	private void addToVisibleNotes() {
 		while (currentNoteIndex < song.notes.size() &&
-				song.notes.get(currentNoteIndex).startBeat + 1 < currentBeat + previewBeats + postviewBeats) {
+				song.notes.get(currentNoteIndex).startBeat < currentBeat + previewBeats) {
 			GuiNote guinote = new GuiNote(song.notes.get(currentNoteIndex), 
 					1, song.notes.get(currentNoteIndex).duration/previewBeats, 
 					Note.noteToPos(song.notes.get(currentNoteIndex).name));

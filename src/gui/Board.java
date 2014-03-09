@@ -80,7 +80,7 @@ public class Board extends JPanel implements ActionListener{
 		for (GuiNote n : visibleNotes) {
 			//System.out.println("")
 			g2.setColor(n.color);
-			int x = (int) (n.x_center * (w - staff_line) - note_circle_radius);
+			int x = (int) (n.x_center * (w - staff_line) - note_circle_radius + staff_line);
 			int y = map_slidepos_to_screen_pos(n.note.position, h) - note_circle_radius;
 			g2.fillOval(x, y, 2*note_circle_radius, 2*note_circle_radius);
 			if (n.note.duration > 0.9) g2.drawRoundRect(x, y, (int) (n.right_side*(w - staff_line)), 2*note_circle_radius, roundrect_arc_len, roundrect_arc_len);
@@ -97,7 +97,7 @@ public class Board extends JPanel implements ActionListener{
 		}
 		g2.drawImage(inslide.getImage(), 0,bone_offset, w/4, h - bone_offset, null);
 		g2.drawImage(outslide.getImage(), 0,(int)
-				(bone_offset - 4 * SlideStats.getFirstOffset(slide.getPosition())), w/4, h - bone_offset, null);
+				(bone_offset - h/150 * SlideStats.getFirstOffset(slide.getPosition())), w/4, h - bone_offset, null);
 		g2.drawImage(bellcon.getImage(), 0,(int)(bone_offset - (h * 0.2)), w/4, (int)(1.2*h - bone_offset), null);
 		/*
 		Ellipse2D e = new Ellipse2D.Double(0, 0, 80, 130);
@@ -116,7 +116,7 @@ public class Board extends JPanel implements ActionListener{
 		g2.setColor(Color.RED);
 		g.setFont(new Font("Comic Sans MS", Font.BOLD, 24)); 
 		g2.drawString("BONEAGE:", 10, 22);
-		g2.drawString("Score: " + player.judge.score, w*8/10, 22);
+		g2.drawString("Score: " + player.judge.score, w*7/10, 22);
 		g2.drawRect(150, 5, w/4, 17);
 	}
 
@@ -133,7 +133,7 @@ public class Board extends JPanel implements ActionListener{
 
 	public int map_slidepos_to_screen_pos(int pos, int h) {
 		int centimeters = SlideStats.getFirstOffset(SlideStats.PositionDistances[pos]);
-		return (int)(h - (275.0/2432) * h - 4 * centimeters);
+		return (int)(h - (275.0/2432) * h - h/150.0 * centimeters);
 	}
 
 
