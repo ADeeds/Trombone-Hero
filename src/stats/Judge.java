@@ -60,7 +60,7 @@ public class Judge {
 
 		// Don't increase boneage as much toward the ends of longer notes
 		// It's not much of a challenge
-		boneage += bc * (currentBeat - startBeat);
+		boneage += bc / ((currentBeat - startBeat) + .001) ;
 		if (boneage < 0) boneage = 0;
 		else if (boneage > 90) {
 			sc *= 5;
