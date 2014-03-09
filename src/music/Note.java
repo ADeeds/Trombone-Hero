@@ -3,7 +3,7 @@ package music;
 /** Note represents a single instance of a pitch being played */
 public class Note {
 	
-	final byte[] PositionDistances =
+	public static final int[] PositionDistances =
 		{	00, /* Zeroth - Ignore */
 			34, /* First */
 			43, /* Second */

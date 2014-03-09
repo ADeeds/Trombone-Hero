@@ -3,11 +3,15 @@ package bone;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+
 import gnu.io.CommPortIdentifier; 
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent; 
 import gnu.io.SerialPortEventListener; 
+
 import java.util.Enumeration;
+
+import music.Note;
 
 
 public class SlideGetter implements SerialPortEventListener, Runnable {
@@ -111,7 +115,21 @@ public class SlideGetter implements SerialPortEventListener, Runnable {
 		initialize();
 	}
 	
-	public int getCentimeters() {
+	/** Returns current centimeter distance */
+	public int getPosition() {
 		return centimeters;
+	}
+	
+	/** Returns slide position number nearest current centimeter distance */
+	public int getNearestSlidePosition() {
+		int minimumMiss = 200;
+		int pos = 1;
+		for (int i = 0; i < 8; i++) {
+			int miss = centimeters - music.Note.PositionDistances[i];
+			if (miss < minimumMiss) {
+				minimumMiss = miss;
+				pos = i;
+			}
+		}
 	}
 }
