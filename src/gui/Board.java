@@ -23,6 +23,7 @@ import bone.SlideGetter;
 import bone.SlideStats;
 
 import music.Song;
+import music.SongPlayer;
 
 public class Board extends JPanel implements ActionListener{
 	int boneage = 50;
@@ -41,7 +42,7 @@ public class Board extends JPanel implements ActionListener{
 	ImageIcon bellcon = new ImageIcon("res/bell.png");
 	ImageIcon inslide = new ImageIcon("res/inslide.png");
 	ImageIcon outslide = new ImageIcon("res/outslide.png");
-	
+	SongPlayer player;
 	public void setSlideGetter(SlideGetter s) {
 		slide = s;
 	}
@@ -55,6 +56,7 @@ public class Board extends JPanel implements ActionListener{
 
 		setDoubleBuffered(true);
 
+		player = new SongPlayer(song);
 
 		timer = new Timer(DELAY, this);
 		start_time = System.currentTimeMillis();
@@ -107,6 +109,7 @@ public class Board extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		long cur_time = System.currentTimeMillis();
 		current_beat = (song.tempo * (cur_time - start_time) / (60f * 1000)) - 8f;
+		player.updateCurrentBeat(current_beat);
 		System.out.println("Current beat: "  + current_beat);
 		if (slide != null) {
 			System.out.println("Pos: " + slide.getPosition());

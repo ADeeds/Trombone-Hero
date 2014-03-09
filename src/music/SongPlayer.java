@@ -55,7 +55,7 @@ public class SongPlayer {
 	 *  to visibleNotes
 	 */
 	private void addToVisibleNotes() {
-		while (currentBeat + previewBeats == song.notes.get(currentNoteIndex).startBeat) {
+		while (currentBeat + previewBeats <= song.notes.get(currentNoteIndex).startBeat) {
 			visibleNotes.add(song.notes.get(currentNoteIndex));
 			currentNoteIndex++;
 		}
@@ -65,7 +65,7 @@ public class SongPlayer {
 	private void advanceNotes() {
 		for (Note n : visibleNotes) {
 			// TODO note.advance or advanceGui
-			if (n.startBeat == currentBeat) {
+			if (n.startBeat <= currentBeat) {
 				// TODO determine if playing correctly then update score accordingly
 			}
 			if (currentBeat > n.startBeat + n.duration + postviewBeats) {
