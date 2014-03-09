@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class SongFileReader {
 	private String filename;
 	
-	SongFileReader(String filename) {
+	public SongFileReader(String filename) {
 		this.filename = filename;
 	}
 	
@@ -26,7 +26,7 @@ public class SongFileReader {
 		return new Note(name, Note.noteToPos(name), start_beat, length);
 	}
 	
-	Song parse() {
+	public Song parse() {
 		Song s = null;
 		ArrayList<Note> notes = new ArrayList<Note>();
 		try {
