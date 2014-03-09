@@ -61,6 +61,6 @@ public class Judge {
 
 		// Weight score by time elapsed since last update
 		// If it's been longer, it should be worth more points
-		score += (int) sc * (currentBeat - beatOfLastUpdate);
+		score += (int) sc * (currentBeat - beatOfLastUpdate) * 34.69;
 	}
 }
