@@ -80,7 +80,7 @@ public class Board extends JPanel implements ActionListener{
 		int h = (int)size.getHeight();
 		int staff_line = w/5;
 		g2.setColor(Color.RED);
-		ArrayList<GuiNote> visibleNotes = player.getVisibleGuiNotes();
+		ArrayList<GuiNote> visibleNotes = (ArrayList<GuiNote>) player.getVisibleGuiNotes().clone();
 		System.out.println(visibleNotes.size());
 		for (GuiNote n : visibleNotes) {
 			//System.out.println("")

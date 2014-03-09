@@ -25,15 +25,15 @@ public class SongPlayer {
 	/** State of SongPlayer */
 	private enum State { STOPPED, PLAYING, PAUSED, DONE }
 	public State state;
-	
+
 
 	private Song song;
-	
+
 	public SongPlayer(Song song) {
 		this.song = song;
 		this.state = State.STOPPED;
 	}
-	
+
 	/** Used to play from beginning or resume from paused */
 	public void play() {
 		if (state != State.PAUSED) {
@@ -42,7 +42,7 @@ public class SongPlayer {
 		}
 		state = State.PLAYING;	
 	}
-	
+
 	/** Adds all notes for which startBeat < currentBeat + previewLength
 	 *  to visibleNotes
 	 */
@@ -55,7 +55,7 @@ public class SongPlayer {
 			currentNoteIndex++;
 		}
 	}
-	
+
 	/** Moves all notes towards current line */
 	private void advanceNotes() {
 		for (GuiNote n : visibleNotes) {
@@ -67,15 +67,15 @@ public class SongPlayer {
 				visibleNotes.remove(n);
 			}
 			else {
-				n.x = (n.note.startBeat - currentBeat)/previewBeats;
+					n.x = (n.note.startBeat - currentBeat)/previewBeats;
 			}
 		}
 	}
-	
+
 	public ArrayList<GuiNote> getVisibleGuiNotes() {
 		return visibleNotes;
 	}
-	
+
 	/** Advances currentBeat to the realtime-determined time elapsed to avoid
 	 *  timer drift. Called by gui/Board
 	 */
@@ -86,9 +86,9 @@ public class SongPlayer {
 		addToVisibleNotes();
 		advanceNotes();
 	}
-	
+
 	/** Causes Judge to recalculate score, boneage, etc. based on current performance */
 	private void judgeMe() {
-		
+
 	}
 }

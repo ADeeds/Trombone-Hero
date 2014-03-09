@@ -35,9 +35,11 @@ public class SongFileReader {
 			int tempo = sc.nextInt();
 			int length = sc.nextInt();
 			int numnotes = sc.nextInt();
-			for(int i = 0; i < numnotes && sc.hasNextLine(); i++) {
+			numnotes = 0;
+			while (sc.hasNextLine()) {
 				String line = sc.nextLine();
 				if(line.length() > 0) notes.add(parse_note(line));
+				numnotes++;
 			}
 			s = new Song(title, tempo, length, numnotes, notes);
 			sc.close();
