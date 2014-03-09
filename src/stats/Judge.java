@@ -9,43 +9,42 @@ import music.*;
 public class Judge {
 
 	Board board;
-	SongPlayer songplayer;
 	public int score;
-	public int boneage;
-	int beatOfLastUpdate;
+	public double boneage;
+	double beatOfLastUpdate;
 	
 	public Judge(Board board, SongPlayer songplayer) {
 		this.board = board;
-		this.songplayer = songplayer;
-		boneage = 0;
+		boneage = 25;
 		beatOfLastUpdate = 0;
 	}
 	
 	/** Given the currently-expected note, updates score and boneage */
-	public void assess(Note n) {
+	public void assess(Note n, double currentBeat) {
 		int miss = SlideStats.getPositionDistance(n.position, board.slide.getPosition());
-		assignPointsFor(miss);
+		assignPointsFor(miss, currentBeat);
+		beatOfLastUpdate = currentBeat;
 	}
 	
 	
-	private void assignPointsFor(int miss) {
-		int bc = 0;
+	private void assignPointsFor(int miss, double currentBeat) {
+		double bc = 0;
 		int sc = 0;
 		
 		if (miss < 3) {
-			bc = 4;
+			bc = 3;
 			sc = 69;
 		}
 		else if (miss < 4) {
-			bc = 3;
+			bc = 2;
 			sc = 57;
 		}
 		else if (miss < 6) {
-			bc = -3;
+			bc = 1;
 			sc = 34;
 		}
 		else if (miss < 9) {
-			bc = -4;
+			bc = -.5;
 			sc = 1; // ...1...1...1...freshman.
 		}
 		else {
@@ -60,7 +59,8 @@ public class Judge {
 			sc *= 5;
 		}
 
-		
-		score += sc;
+		// Weight score by time elapsed since last update
+		// If it's been longer, it should be worth more points
+		score += (int) sc * (currentBeat - beatOfLastUpdate);
 	}
 }

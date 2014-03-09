@@ -107,6 +107,6 @@ public class SongPlayer {
 	/** Causes Judge to recalculate score, boneage, etc. based on current performance */
 
 	private void judgeMeOn(Note n) {
-		judge.assess(n);
+		judge.assess(n, currentBeat);
 	}
 }
