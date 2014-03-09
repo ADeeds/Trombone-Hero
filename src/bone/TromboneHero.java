@@ -29,7 +29,8 @@ public class TromboneHero {
 		Thread slidethread = new Thread(slider);
 		slidethread.start();
 		GameFrame frame = new GameFrame();
-		
+		System.err.println(slider);
+		frame.setSlider(slider);
 
 	}
 

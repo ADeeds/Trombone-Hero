@@ -11,10 +11,13 @@ import java.util.Enumeration;
 
 
 public class SlideGetter implements SerialPortEventListener, Runnable {
+	int centimeters = 0;
+	
 	SerialPort serialPort;
         /** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { 
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
+			"/dev/tty.usbmodemfa141", //Actually Mac OS X
 			"/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 	};
@@ -30,9 +33,7 @@ public class SlideGetter implements SerialPortEventListener, Runnable {
 	private static final int TIME_OUT = 2000;
 	/** Default bits per second for COM port. */
 	private static final int DATA_RATE = 9600;
-	
-	int centimeters = 0;
-	
+		
 	public void initialize() {
 		CommPortIdentifier portId = null;
 		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
@@ -65,6 +66,7 @@ public class SlideGetter implements SerialPortEventListener, Runnable {
 
 			// open the streams
 			input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
+			
 			output = serialPort.getOutputStream();
 
 			// add event listeners
@@ -90,10 +92,13 @@ public class SlideGetter implements SerialPortEventListener, Runnable {
 	 * Handle an event on the serial port. Read the data and print it.
 	 */
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
+		
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				String inputLine=input.readLine();
-				System.out.println(inputLine);
+				centimeters = Integer.parseInt(inputLine);
+				// System.out.println(inputLine);
+				
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}
@@ -104,5 +109,9 @@ public class SlideGetter implements SerialPortEventListener, Runnable {
 	@Override
 	public void run() {
 		initialize();
+	}
+	
+	public int getPosition() {
+		return centimeters;
 	}
 }
