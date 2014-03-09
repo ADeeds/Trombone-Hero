@@ -1,5 +1,7 @@
 package bone;
 
+import music.*;
+
 public class TromboneHero {
 
 	/**
@@ -11,6 +13,9 @@ public class TromboneHero {
 	
 	TromboneHero() {
 		System.out.println("TROMBONE HERO!!!!!!!!");
+		SongFileReader fr = new SongFileReader("tribute.bone");
+		Song s = fr.parse();
+		
 	}
 
 }
