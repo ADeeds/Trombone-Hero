@@ -32,6 +32,7 @@ public class Note {
 	
 	Note(String n, Position pos, float start, float dur) {
 		set(n, pos, start, dur);
+		this.octave = 1;
 	}
 
 	Note(String n, Position pos, int oct, float start, float dur) {
