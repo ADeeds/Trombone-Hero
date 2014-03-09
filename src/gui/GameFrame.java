@@ -39,8 +39,10 @@ public class GameFrame {
 		    			frame.remove((Component) arg0.getSource());
 		    			frame.repaint();
 		    			b = new Board(song);
-		    			b.setSlideGetter(slide);
 		    			b.setSize(frame.getWidth(), frame.getHeight());
+		    			b.setPreferredSize(frame.getSize());
+		    			b.setMaximumSize(frame.getSize());
+		    			b.setSlideGetter(slide);
 		    			frame.add(b);
 
 		    		} else {

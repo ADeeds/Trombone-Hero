@@ -117,6 +117,8 @@ public class SlideGetter implements SerialPortEventListener, Runnable {
 	
 	/** Returns current centimeter distance */
 	public int getPosition() {
-		return centimeters;
+		int cur_pos = centimeters - 34;
+		if (cur_pos < 2) cur_pos = 0;
+		return cur_pos;
 	}
 }

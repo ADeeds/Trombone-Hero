@@ -4,7 +4,7 @@
 #define trigPin 8 // Trigger Pin
 #define LEDPin 13 // Onboard LED
 
-#define buffer_size 4
+#define buffer_size 5
 
 int maximumRange = 200; // Maximum range needed
 int minimumRange = 0; // Minimum range needed
@@ -55,10 +55,10 @@ void loop() {
  sum += distance;
  buffer_index = (buffer_index + 1) % buffer_size;
  outrange_count = 0;
- Serial.println(sum/buffer_size);
+ if (buffer_index == 0) Serial.println(sum/buffer_size);
  digitalWrite(LEDPin, LOW); 
  }
  
  //Delay 50ms before next reading.
- delay(75);
+ delay(10);
 }
