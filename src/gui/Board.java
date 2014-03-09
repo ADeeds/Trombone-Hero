@@ -27,7 +27,7 @@ import music.SongPlayer;
 
 public class Board extends JPanel implements ActionListener{
 	int boneage = 50;
-	
+	final int note_circle_radius = 10;
 	final int bone_offset = 0;
 	ArrayList<ImageIcon> icons = new ArrayList<ImageIcon>();
 	private Timer timer;
@@ -79,10 +79,15 @@ public class Board extends JPanel implements ActionListener{
 		int w = (int)size.getWidth();
 		int h = (int)size.getHeight();
 		int staff_line = w/5;
-		ArrayList<GuiNote> visibleNotes = player.getVisibleGuiNotes();
 		g2.setColor(Color.RED);
+		ArrayList<GuiNote> visibleNotes = player.getVisibleGuiNotes();
+		System.out.println(visibleNotes.size());
 		for (GuiNote n : visibleNotes) {
-			
+			//System.out.println("")
+			int x = (int) (n.x * (w - staff_line) - note_circle_radius);
+			int y = map_slidepos_to_screen_pos(n.position, h) - note_circle_radius;
+			g2.drawOval(x, y, 2*note_circle_radius, 2*note_circle_radius);
+			g2.drawString(n.note.name, x, y);
 		}
 		
 		
@@ -90,8 +95,7 @@ public class Board extends JPanel implements ActionListener{
 		g2.setColor(Color.GRAY);
 		for(int i = 1; i < 8; i++) {
 			//First pos is 275 pixels tall
-			int offset = SlideStats.getFirstOffset(SlideStats.PositionDistances[i]);
-			int height = (int)(h - (275.0/2432) * h - 4 * offset);
+			int height = map_slidepos_to_screen_pos(i, h);
 			g2.drawLine(0,height, w, height);
 		}
 		g2.drawImage(inslide.getImage(), 0,bone_offset, w/4, h - bone_offset, null);
@@ -128,5 +132,12 @@ public class Board extends JPanel implements ActionListener{
 		repaint();  
 		frame++;
 	}
+	
+	public int map_slidepos_to_screen_pos(int pos, int h) {
+		int centimeters = SlideStats.getFirstOffset(SlideStats.PositionDistances[pos]);
+		return (int)(h - (275.0/2432) * h - 4 * centimeters);
+	}
+	
+	
 	
 }
