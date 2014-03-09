@@ -20,11 +20,14 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import bone.SlideGetter;
+import bone.SlideStats;
 
 import music.Song;
 
 public class Board extends JPanel implements ActionListener{
 	int boneage = 50;
+	
+	final int bone_offset = 50;
 
 	ArrayList<ImageIcon> icons = new ArrayList<ImageIcon>();
 	private Timer timer;
@@ -77,9 +80,10 @@ public class Board extends JPanel implements ActionListener{
 		int w = (int)size.getWidth();
 		int h = (int)size.getHeight();
 		//System.out.println(w + "\t" + h);
-		g2.drawImage(inslide.getImage(), 0,100, 200, h - 100, null);
-		g2.drawImage(outslide.getImage(), 0,(int)(100 - 2.5*slide.getPosition()), 200, h - 50, null);
-		g2.drawImage(bellcon.getImage(), 0,100, 200, h - 50, null);
+		g2.drawImage(inslide.getImage(), 0,bone_offset, 200, h - bone_offset, null);
+		g2.drawImage(outslide.getImage(), 0,(int)
+				(bone_offset - 2.6 * SlideStats.getNearestSlidePosition(slide.getPosition())), 200, h - bone_offset, null);
+		g2.drawImage(bellcon.getImage(), 0,bone_offset, 200, h - bone_offset, null);
 		/*
 		Ellipse2D e = new Ellipse2D.Double(0, 0, 80, 130);
 		g2.setStroke(new BasicStroke(1));
