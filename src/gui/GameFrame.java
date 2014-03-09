@@ -10,11 +10,15 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import bone.SlideGetter;
+
 import music.Song;
 import music.SongFileReader;
 
 public class GameFrame {
 	Song song;
+	SlideGetter slide;
+	Board b;
 	final JFrame frame = new JFrame("TROMBONE HERO");
 
 	private ActionListener opensong() {
@@ -34,7 +38,8 @@ public class GameFrame {
 		    			System.out.println(song.title + " is loaded");
 		    			frame.remove((Component) arg0.getSource());
 		    			frame.repaint();
-		    			Board b = new Board(song);
+		    			b = new Board(song);
+		    			b.setSlideGetter(slide);
 		    			b.setSize(frame.getWidth(), frame.getHeight());
 		    			frame.add(b);
 
@@ -57,6 +62,11 @@ public class GameFrame {
 		frame.add(openbutton);
 		//frame.pack();
 		frame.setVisible(true);
+	}
+
+	public void setSlider(SlideGetter slider) {
+		System.out.println(slider);
+		slide = slider;
 	}
 	
 	
