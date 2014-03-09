@@ -15,14 +15,13 @@ public class SongFileReader {
 	}
 	
 	Note parse_note(String line) {
-		String[] parsed = line.split(" ");
-		String name = parsed[0];
-		float start_beat = Float.parseFloat(parsed[1]);
-		float length = Float.parseFloat(parsed[2]);
-		if(parsed.length > 3) {
-			System.out.println("Note has too many parameters!");
-		}
-		System.out.println("Note " + name + " starts at " + start_beat + " and lasts for " + length + " beats");
+		System.out.println(line);
+		Scanner sc = new Scanner(line);
+		String name = sc.next();
+		float start_beat = sc.nextFloat();
+		float length = sc.nextFloat();
+		
+		//System.out.println("Note " + name + " starts at " + start_beat + " and lasts for " + length + " beats");
 		return new Note(name, Note.noteToPos(name), start_beat, length);
 	}
 	
