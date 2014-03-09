@@ -3,15 +3,40 @@ package gui;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class Board extends JPanel{
+public class Board extends JPanel implements ActionListener{
+
+	ArrayList<ImageIcon> icons = new ArrayList<ImageIcon>();
+    private Timer timer;
+
+    private final int DELAY = 20;
+    
+    public Board() {
+    	initBoard();
+    }
+	private void initBoard() {
+
+		setBackground(Color.BLACK);
+
+		setDoubleBuffered(true);
+
+
+		timer = new Timer(DELAY, this);
+		timer.start();
+	}
 
 	public void paint(Graphics g)
 	{
@@ -31,7 +56,6 @@ public class Board extends JPanel{
 		Dimension size = getSize();
 		double w = size.getWidth();
 		double h = size.getHeight();
-
 		Ellipse2D e = new Ellipse2D.Double(0, 0, 80, 130);
 		g2.setStroke(new BasicStroke(1));
 		g2.setColor(Color.gray);
@@ -41,5 +65,15 @@ public class Board extends JPanel{
 			at.rotate(Math.toRadians(deg));
 			g2.draw(at.createTransformedShape(e));
 		}
+		g2.setColor(Color.RED);
+		g.setFont(new Font("Comic Sans MS", Font.BOLD, 24)); 
+		g2.drawString("BONEAGE:", 10, 22);
+		g2.drawRect(150, 5, 200, 17);
 	}
+	
+	   @Override
+	    public void actionPerformed(ActionEvent e) {
+		   
+	        repaint();  
+	    }
 }
