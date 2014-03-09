@@ -83,12 +83,8 @@ public class Board extends JPanel implements ActionListener{
 		g2.setColor(Color.GRAY);
 		for(int i = 1; i < 8; i++) {
 			//First pos is 275 pixels tall
-			/*int height = (int) (h - 5.8 * (SlideStats.getFirstOffset(SlideStats.PositionDistances[i])) -
-					(275.0/2432) * (h - bone_offset));*/
 			int offset = SlideStats.getFirstOffset(SlideStats.PositionDistances[i]);
-			System.out.println(i + ": " + offset);
-			int height = (int)
-					(h - (275.0/2432) * h - 4 * offset);
+			int height = (int)(h - (275.0/2432) * h - 4 * offset);
 			g2.drawLine(0,height, w, height);
 		}
 		g2.drawImage(inslide.getImage(), 0,bone_offset, w/4, h - bone_offset, null);
@@ -105,6 +101,8 @@ public class Board extends JPanel implements ActionListener{
 			at.rotate(Math.toRadians(deg));
 			g2.draw(at.createTransformedShape(e));
 		}*/
+		g2.setColor(Color.WHITE);
+		g2.drawLine(w/5 + 4, 0, w/5 + 4, h);
 		g2.setColor(Color.YELLOW);
 		g2.fillRect(150, 5, 200 * boneage / 100, 17);
 		g2.setColor(Color.RED);

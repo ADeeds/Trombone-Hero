@@ -47,8 +47,8 @@ public class SongPlayer {
 	private void addToVisibleNotes() {
 		while (currentNoteIndex < song.notes.size() &&
 				currentBeat + previewBeats <= song.notes.get(currentNoteIndex).startBeat) {
-			//visibleNotes.add(song.notes.get(currentNoteIndex));
-			//currentNoteIndex++;
+			visibleNotes.add(song.notes.get(currentNoteIndex));
+			currentNoteIndex++;
 		}
 	}
 	
