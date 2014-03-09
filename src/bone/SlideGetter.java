@@ -119,17 +119,4 @@ public class SlideGetter implements SerialPortEventListener, Runnable {
 	public int getPosition() {
 		return centimeters;
 	}
-	
-	/** Returns slide position number nearest current centimeter distance */
-	public int getNearestSlidePosition() {
-		int minimumMiss = 200;
-		int pos = 1;
-		for (int i = 0; i < 8; i++) {
-			int miss = centimeters - music.Note.PositionDistances[i];
-			if (miss < minimumMiss) {
-				minimumMiss = miss;
-				pos = i;
-			}
-		}
-	}
 }

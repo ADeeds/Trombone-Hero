@@ -3,17 +3,6 @@ package music;
 /** Note represents a single instance of a pitch being played */
 public class Note {
 	
-	public static final int[] PositionDistances =
-		{	00, /* Zeroth - Ignore */
-			34, /* First */
-			43, /* Second */
-			52, /* Third */
-			31, /* Fourth */
-			74, /* Fifth */
-			82, /* Sixth */
-			95  /* Seventh */
-		};
-	
 	static int noteToPos(String name) {
 		if (name.equals("Bb")) return 1;
 		if (name.equals("B")) return 7;
@@ -62,9 +51,5 @@ public class Note {
 	public Note(String n, int oct, float start, float dur) {
 		set(n, start, dur);
 		this.octave = oct;
-	}
-	
-	public int getPositionDistance() {
-		return PositionDistances[this.position];
 	}
 }
