@@ -49,7 +49,7 @@ public class Board extends JPanel implements ActionListener{
 		initBoard();
 	}
 	private void initBoard() {
-		player = new SongPlayer(song);
+		player = new SongPlayer(this, song);
 
 		setBackground(Color.BLACK);
 

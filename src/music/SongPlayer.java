@@ -1,8 +1,11 @@
 package music;
 
+import gui.Board;
 import gui.GuiNote;
 
 import java.util.ArrayList;
+
+import stats.Judge;
 
 /** Plays a song
  * 
@@ -10,6 +13,8 @@ import java.util.ArrayList;
  *
  */
 public class SongPlayer {
+	
+	private Board board;
 
 	/** Number of beats to "look ahead" */
 	private static float previewBeats = 12;
@@ -25,13 +30,17 @@ public class SongPlayer {
 	/** State of SongPlayer */
 	private enum State { STOPPED, PLAYING, PAUSED, DONE }
 	public State state;
-
+	
+	private Judge judge;
+	
 
 	private Song song;
-
-	public SongPlayer(Song song) {
+	
+	public SongPlayer(Board board, Song song) {
+		this.board = board;
 		this.song = song;
 		this.state = State.STOPPED;
+		this.judge = new Judge(board);
 	}
 
 	/** Used to play from beginning or resume from paused */
@@ -61,7 +70,7 @@ public class SongPlayer {
 		for (GuiNote n : visibleNotes) {
 			// TODO note.advance or advanceGui
 			if (n.note.startBeat <= currentBeat) {
-				// TODO determine if playing correctly then update score accordingly
+				judgeMeOn(n.note);
 			}
 			if (currentBeat > n.note.startBeat + n.note.duration + postviewBeats) {
 				visibleNotes.remove(n);
@@ -82,13 +91,13 @@ public class SongPlayer {
 	public void advanceToTime(long tot_elapsed) {
 		currentBeat = (song.tempo * tot_elapsed / (60.0 * 1000.0)) - previewBeats;
 		System.out.println("Cur beat: " + currentBeat);
-		judgeMe();
 		addToVisibleNotes();
 		advanceNotes();
 	}
 
 	/** Causes Judge to recalculate score, boneage, etc. based on current performance */
-	private void judgeMe() {
 
+	private void judgeMeOn(Note n) {
+		
 	}
 }
