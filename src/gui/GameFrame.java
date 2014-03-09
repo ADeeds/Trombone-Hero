@@ -34,6 +34,9 @@ public class GameFrame {
 		    			System.out.println(song.title + " is loaded");
 		    			frame.remove((Component) arg0.getSource());
 		    			frame.repaint();
+		    			Board b = new Board();
+		    			b.setSize(frame.getWidth(), frame.getHeight());
+		    			frame.add(b);
 
 		    		} else {
 		    			System.err.println("Song couldn't be opened");
