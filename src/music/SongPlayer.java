@@ -93,6 +93,9 @@ public class SongPlayer {
 		//System.out.println("Cur beat: " + currentBeat);
 		addToVisibleNotes();
 		advanceNotes();
+		if (currentBeat > song.num_beats) {
+			state = State.DONE;
+		}
 	}
 
 	/** Causes Judge to recalculate score, boneage, etc. based on current performance */
