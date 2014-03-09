@@ -31,7 +31,7 @@ public class SongPlayer {
 	private enum State { STOPPED, PLAYING, PAUSED, DONE }
 	public State state;
 	
-	private Judge judge;
+	public Judge judge;
 	
 
 	private Song song;
@@ -40,7 +40,7 @@ public class SongPlayer {
 		this.board = board;
 		this.song = song;
 		this.state = State.STOPPED;
-		this.judge = new Judge(board);
+		this.judge = new Judge(board, this);
 	}
 
 	/** Used to play from beginning or resume from paused */
@@ -98,6 +98,6 @@ public class SongPlayer {
 	/** Causes Judge to recalculate score, boneage, etc. based on current performance */
 
 	private void judgeMeOn(Note n) {
-		
+		judge.assess(n);
 	}
 }

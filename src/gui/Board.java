@@ -36,7 +36,7 @@ public class Board extends JPanel implements ActionListener{
 	private Song song;
 	private long start_time = 0;
 	long frame = 0;
-	SlideGetter slide;
+	public SlideGetter slide;
 	ImageIcon bellcon = new ImageIcon("res/bell.png");
 	ImageIcon inslide = new ImageIcon("res/inslide.png");
 	ImageIcon outslide = new ImageIcon("res/outslide.png");
