@@ -112,11 +112,11 @@ public class Board extends JPanel implements ActionListener{
 		g2.setColor(Color.WHITE);
 		g2.drawLine(w/5 + 4, h/4, w/5 + 4, h*5/4);
 		g2.setColor(Color.YELLOW);
-		g2.fillRect(150, 5, (int)(player.judge.boneage / 100) * (w/4), 17);
+		g2.fillRect(150, 5, (int)((player.judge.boneage / 100.0) * (w/4.0)), 17);
 		g2.setColor(Color.RED);
 		g.setFont(new Font("Comic Sans MS", Font.BOLD, 24)); 
 		g2.drawString("BONEAGE:", 10, 22);
-		g2.drawString("Score: " + player.judge.score, w*7/10, 22);
+		g2.drawString("Score: " + player.judge.boneage, w*7/10, 22);
 		g2.drawRect(150, 5, w/4, 17);
 	}
 
@@ -127,8 +127,9 @@ public class Board extends JPanel implements ActionListener{
 		/*if (slide != null) {
 			System.out.println("Pos: " + slide.getPosition());
 		}*/
-		repaint();  
-		frame++;
+		repaint();
+		
+		//frame++;
 	}
 
 	public int map_slidepos_to_screen_pos(int pos, int h) {
