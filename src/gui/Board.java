@@ -116,7 +116,7 @@ public class Board extends JPanel implements ActionListener{
 		g2.setColor(Color.RED);
 		g.setFont(new Font("Comic Sans MS", Font.BOLD, 24)); 
 		g2.drawString("BONEAGE:", 10, 22);
-		g2.drawString("Score: " + player.judge.boneage, w*7/10, 22);
+		g2.drawString("Score: " + player.judge.score, w*7/10, 22);
 		g2.drawRect(150, 5, w/4, 17);
 	}
 

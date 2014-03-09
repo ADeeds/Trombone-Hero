@@ -1,13 +1,18 @@
 package gui;
 
 import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.io.File;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import bone.SlideGetter;
@@ -59,9 +64,37 @@ public class GameFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 600);
 		frame.setLocationRelativeTo(null);
-		JButton openbutton = new JButton("OPEN A SONG");
-		openbutton.addActionListener(opensong());
-		frame.add(openbutton);
+		ImageIcon icon = new ImageIcon("res/title.png");
+		frame.setIconImage(icon.getImage());
+
+		final JButton title = new JButton(icon);
+		title.setSize(frame.getSize());
+		title.addActionListener(opensong());
+		frame.addComponentListener(new ComponentListener() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void componentResized(ComponentEvent arg0) {
+				title.setSize(frame.getSize());
+			}
+			
+			@Override
+			public void componentMoved(ComponentEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void componentHidden(ComponentEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		frame.add(title);
 		//frame.pack();
 		frame.setVisible(true);
 	}
