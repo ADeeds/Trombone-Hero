@@ -39,23 +39,23 @@ public class Judge {
 			sc = 69;
 			newColor = Color.GREEN;
 		}
-		else if (miss < 4) {
+		else if (miss < 5) {
 			bc = 2;
-			sc = 57;
+			sc = 34;
 			newColor = Color.YELLOW;
 		}
-		else if (miss < 6) {
+		else if (miss < 8) {
 			bc = 1;
-			sc = 34;
+			sc = 1;
 			newColor = Color.RED;
 		}
-		else if (miss < 9) {
+		else if (miss < 11) {
 			bc = -.5;
-			sc = 1; // ...1...1...1...freshman.
+			sc = -15; // ...1...1...1...freshman.
 		}
 		else {
 			bc = -6;
-			sc = -5; // Jeff
+			sc = -34; // Jeff
 		}
 		
 		boneage += bc;
@@ -67,7 +67,7 @@ public class Judge {
 
 		// Weight score by time elapsed since last update
 		// If it's been longer, it should be worth more points
-		score += (int) sc * (currentBeat - beatOfLastUpdate) * 34.69;
+		score += (int) sc * (currentBeat - beatOfLastUpdate) * 3.469;
 		return newColor;
 	}
 }
