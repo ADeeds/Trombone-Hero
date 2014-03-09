@@ -7,7 +7,7 @@ package music;
 public class Note {
 
 	/** Slide position on trombone */
-	enum Position { FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH, SEVENTH }
+	public enum Position { FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH, SEVENTH }
 	public Position position;
 	
 	/** The starting beat of the note */
