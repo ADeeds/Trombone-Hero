@@ -1,3 +1,4 @@
+package music;
 /** Note represents a single instance of a pitch being played 
  * 
  * @author Chase
@@ -7,20 +8,25 @@ public class Note {
 
 	/** Slide position on trombone */
 	enum Position { FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH, SEVENTH }
-	Position position;
+	public Position position;
 	
 	/** The starting beat of the note */
-	float startTime;
+	public float startTime;
 	
 	/** The length of the note in beats */
-	float duration;
+	public float duration;
 	
 	/** The name of the note pitch (on trombone, same as concert pitch) */
-	String name;
+	public String name;
 
 	Note(Position pos, float start, float dur) {
 		this.position = pos;
 		this.startTime = start;
 		this.duration = dur;
+	}
+	
+	/** Assigns note name (probably called later) */
+	void setName(String n) {
+		this.name = n;
 	}
 }
