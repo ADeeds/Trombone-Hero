@@ -13,13 +13,14 @@ public class Judge {
 	Board board;
 	public int score;
 	public double boneage;
-	public double accuracy;
+	public double numNotesHit;
 	double beatOfLastUpdate;
 	
 	public Judge(Board board, SongPlayer songplayer) {
 		this.board = board;
 		boneage = 25;
 		beatOfLastUpdate = 0;
+		numNotesHit = 0;
 	}
 	
 	/** Given the currently-expected note, updates score and boneage */
@@ -38,11 +39,13 @@ public class Judge {
 		if (miss < 3) {
 			bc = 1.5;
 			sc = 69;
+			numNotesHit += 1;
 			newColor = Color.GREEN;
 		}
 		else if (miss < 5) {
 			bc = .5;
 			sc = 34;
+			numNotesHit += .5;
 			newColor = Color.YELLOW;
 		}
 		else if (miss < 8) {
