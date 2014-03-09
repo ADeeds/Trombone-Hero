@@ -24,12 +24,12 @@ public class Judge {
 	/** Given the currently-expected note, updates score and boneage */
 	public void assess(GuiNote n, double currentBeat) {
 		int miss = SlideStats.getPositionDistance(n.note.position, board.slide.getPosition());
-		n.color = assignPointsFor(miss, currentBeat);
+		n.color = assignPointsFor(miss, currentBeat, n.note.startBeat);
 		beatOfLastUpdate = currentBeat;
 	}
 	
 	
-	private Color assignPointsFor(int miss, double currentBeat) {
+	private Color assignPointsFor(int miss, double currentBeat, float startBeat) {
 		double bc = 0;
 		int sc = 0;
 		Color newColor = Color.BLUE;
@@ -57,8 +57,10 @@ public class Judge {
 			bc = -.6;
 			sc = -34; // Jeff
 		}
-		
-		boneage += bc;
+
+		// Don't increase boneage as much toward the ends of longer notes
+		// It's not much of a challenge
+		boneage += bc * (currentBeat - startBeat);
 		if (boneage < 0) boneage = 0;
 		else if (boneage > 90) {
 			sc *= 5;
