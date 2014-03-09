@@ -28,7 +28,7 @@ import music.SongPlayer;
 public class Board extends JPanel implements ActionListener{
 	int boneage = 50;
 	
-	final int bone_offset = 50;
+	final int bone_offset = 0;
 
 	ArrayList<ImageIcon> icons = new ArrayList<ImageIcon>();
 	private Timer timer;
@@ -83,13 +83,18 @@ public class Board extends JPanel implements ActionListener{
 		g2.setColor(Color.GRAY);
 		for(int i = 1; i < 8; i++) {
 			//First pos is 275 pixels tall
-			int height = (int) (h - 2.6 * (SlideStats.getFirstOffset(SlideStats.PositionDistances[i])) + 275);
+			/*int height = (int) (h - 5.8 * (SlideStats.getFirstOffset(SlideStats.PositionDistances[i])) -
+					(275.0/2432) * (h - bone_offset));*/
+			int offset = SlideStats.getFirstOffset(SlideStats.PositionDistances[i]);
+			System.out.println(i + ": " + offset);
+			int height = (int)
+					(h - (275.0/2432) * h - 4 * offset);
 			g2.drawLine(0,height, w, height);
 		}
 		g2.drawImage(inslide.getImage(), 0,bone_offset, w/4, h - bone_offset, null);
 		g2.drawImage(outslide.getImage(), 0,(int)
-				(bone_offset - 2.6 * SlideStats.getFirstOffset(slide.getPosition())), w/4, h - bone_offset, null);
-		g2.drawImage(bellcon.getImage(), 0,bone_offset, w/4, h - bone_offset, null);
+				(bone_offset - 4 * SlideStats.getFirstOffset(slide.getPosition())), w/4, h - bone_offset, null);
+		g2.drawImage(bellcon.getImage(), 0,(int)(bone_offset - (h * 0.2)), w/4, (int)(1.2*h - bone_offset), null);
 		/*
 		Ellipse2D e = new Ellipse2D.Double(0, 0, 80, 130);
 		g2.setStroke(new BasicStroke(1));

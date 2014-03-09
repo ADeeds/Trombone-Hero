@@ -7,7 +7,7 @@ public class SlideStats {
 			34, /* First */
 			43, /* Second */
 			52, /* Third */
-			31, /* Fourth */
+			61, /* Fourth */
 			74, /* Fifth */
 			82, /* Sixth */
 			95  /* Seventh */
