@@ -23,6 +23,7 @@ public class SongFileReader {
 			System.out.println("Note has too many parameters!");
 		}
 		System.out.println("Note " + name + " starts at " + start_beat + " and lasts for " + length + " beats");
+		return new Note(name, Note.noteToPos(name), start_beat, length);
 	}
 	
 	Song parse() {
