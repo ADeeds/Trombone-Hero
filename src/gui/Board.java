@@ -90,7 +90,7 @@ public class Board extends JPanel implements ActionListener{
 			int y = map_slidepos_to_screen_pos(n.position, h) - note_circle_radius;
 			g2.drawOval(x, y, 2*note_circle_radius, 2*note_circle_radius);
 			if (n.note.duration > 0.9) g2.drawRoundRect(x, y, (int) (n.right_side*(w - staff_line)), 2*note_circle_radius, 15, 15);
-			g2.drawString(n.note.name, x, y);
+			g2.drawString(n.note.name, x + note_circle_radius, y - 5);
 		}
 
 

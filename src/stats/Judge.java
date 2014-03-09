@@ -5,7 +5,7 @@ import music.*;
 
 public class Judge {
 
-	private int boneage;
+	public int boneage;
 	private int score;
 	private Board board;
 	
