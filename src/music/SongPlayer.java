@@ -1,5 +1,7 @@
 package music;
 
+import gui.GuiNote;
+
 import java.util.ArrayList;
 
 /** Plays a song
@@ -15,7 +17,7 @@ public class SongPlayer {
 	private static float postviewBeats = 2;
 
 	/** Currently visible notes */
-	private ArrayList<Note> visibleNotes = new ArrayList<Note>();
+	private ArrayList<GuiNote> visibleNotes = new ArrayList<GuiNote>();
 	/** Current beat of playback */
 	public double currentBeat;
 	/** Index of currently iterating note */
@@ -47,22 +49,32 @@ public class SongPlayer {
 	private void addToVisibleNotes() {
 		while (currentNoteIndex < song.notes.size() &&
 				currentBeat + previewBeats <= song.notes.get(currentNoteIndex).startBeat) {
-			visibleNotes.add(song.notes.get(currentNoteIndex));
+			GuiNote guinote = new GuiNote(song.notes.get(currentNoteIndex), 
+					1, Note.noteToPos(song.notes.get(currentNoteIndex).name));
+			visibleNotes.add(guinote);
+			
 			currentNoteIndex++;
 		}
 	}
 	
 	/** Moves all notes towards current line */
 	private void advanceNotes() {
-		for (Note n : visibleNotes) {
+		for (GuiNote n : visibleNotes) {
 			// TODO note.advance or advanceGui
-			if (n.startBeat <= currentBeat) {
+			if (n.note.startBeat <= currentBeat) {
 				// TODO determine if playing correctly then update score accordingly
 			}
-			if (currentBeat > n.startBeat + n.duration + postviewBeats) {
+			if (currentBeat > n.note.startBeat + n.note.duration + postviewBeats) {
 				visibleNotes.remove(n);
 			}
+			else {
+				n.x = (n.note.startBeat - currentBeat)/previewBeats;
+			}
 		}
+	}
+	
+	public ArrayList<GuiNote> getVisibleGuiNotes() {
+		return visibleNotes;
 	}
 	
 	/** Advances currentBeat to the realtime-determined time elapsed to avoid

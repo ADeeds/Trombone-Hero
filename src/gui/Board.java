@@ -29,7 +29,6 @@ public class Board extends JPanel implements ActionListener{
 	int boneage = 50;
 	
 	final int bone_offset = 0;
-
 	ArrayList<ImageIcon> icons = new ArrayList<ImageIcon>();
 	private Timer timer;
 
@@ -79,6 +78,14 @@ public class Board extends JPanel implements ActionListener{
 		Dimension size = getSize();
 		int w = (int)size.getWidth();
 		int h = (int)size.getHeight();
+		int staff_line = w/5;
+		ArrayList<GuiNote> visibleNotes = player.getVisibleGuiNotes();
+		g2.setColor(Color.RED);
+		for (GuiNote n : visibleNotes) {
+			
+		}
+		
+		
 		//System.out.println(w + "\t" + h);
 		g2.setColor(Color.GRAY);
 		for(int i = 1; i < 8; i++) {
@@ -121,4 +128,5 @@ public class Board extends JPanel implements ActionListener{
 		repaint();  
 		frame++;
 	}
+	
 }
