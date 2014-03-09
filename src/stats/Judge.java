@@ -60,9 +60,11 @@ public class Judge {
 		
 		boneage += bc;
 		if (boneage < 0) boneage = 0;
-		else if (boneage > 100) {
-			boneage = 100;
+		else if (boneage > 90) {
 			sc *= 5;
+			if (boneage > 100) {
+				boneage = 100;
+			}
 		}
 
 		// Weight score by time elapsed since last update
