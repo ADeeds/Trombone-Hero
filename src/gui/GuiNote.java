@@ -4,11 +4,16 @@ import music.Note;
 
 public class GuiNote {
 	public Note note;
-	public double x;
+	public double x_center, right_side;
 	public int position;
-	public GuiNote(Note n, double x, int pos) {
+	public boolean highlight = false;
+	public GuiNote(Note n, double x, double right_side, int pos) {
 		this.note = n;
-		this.x = x;
+		x_center = x;
+		this.right_side = right_side;
 		position = pos;
+	}
+	public void setHighlight(boolean h) {
+		highlight = h;
 	}
 }

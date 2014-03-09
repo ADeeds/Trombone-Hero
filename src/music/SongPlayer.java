@@ -13,7 +13,7 @@ import stats.Judge;
  *
  */
 public class SongPlayer {
-	
+
 	private Board board;
 
 	/** Number of beats to "look ahead" */
@@ -30,12 +30,12 @@ public class SongPlayer {
 	/** State of SongPlayer */
 	private enum State { STOPPED, PLAYING, PAUSED, DONE }
 	public State state;
-	
-	private Judge judge;
-	
+
+	public Judge judge;
+
 
 	private Song song;
-	
+
 	public SongPlayer(Board board, Song song) {
 		this.board = board;
 		this.song = song;
@@ -57,9 +57,11 @@ public class SongPlayer {
 	 */
 	private void addToVisibleNotes() {
 		while (currentNoteIndex < song.notes.size() &&
-				currentBeat + previewBeats >= song.notes.get(currentNoteIndex).startBeat) {
+				song.notes.get(currentNoteIndex).startBeat + 1 < currentBeat + previewBeats + postviewBeats) {
 			GuiNote guinote = new GuiNote(song.notes.get(currentNoteIndex), 
-					1, Note.noteToPos(song.notes.get(currentNoteIndex).name));
+					1, song.notes.get(currentNoteIndex).duration/previewBeats, 
+					Note.noteToPos(song.notes.get(currentNoteIndex).name));
+			//System.out.println("X width: " + guinote.right_side);
 			visibleNotes.add(guinote);
 			currentNoteIndex++;
 		}
@@ -67,8 +69,9 @@ public class SongPlayer {
 
 	/** Moves all notes towards current line */
 	private void advanceNotes() {
-		for (GuiNote n : visibleNotes) {
-			// TODO note.advance or advanceGui
+		System.out.println("Num visible:" + visibleNotes.size());
+		for (int i = 0; i < visibleNotes.size(); i++) {
+			GuiNote n = visibleNotes.get(i);
 			if (n.note.startBeat <= currentBeat) {
 				judgeMeOn(n.note);
 			}
@@ -76,12 +79,19 @@ public class SongPlayer {
 				visibleNotes.remove(n);
 			}
 			else {
-					n.x = (n.note.startBeat - currentBeat)/previewBeats;
+				double start_minus_cur = n.note.startBeat - currentBeat;
+				n.x_center = (start_minus_cur)/previewBeats;
+				if (n.x_center < 0.25 && 
+						n.note.startBeat + n.note.duration - currentBeat > 0.25) {
+					n.setHighlight(true);
+				} else {
+					n.setHighlight(false);
+				}
 			}
 		}
 	}
 
-	public ArrayList<GuiNote> getVisibleGuiNotes() {
+	public  ArrayList<GuiNote> getVisibleGuiNotes() {
 		return visibleNotes;
 	}
 
@@ -90,7 +100,7 @@ public class SongPlayer {
 	 */
 	public void advanceToTime(long tot_elapsed) {
 		currentBeat = (song.tempo * tot_elapsed / (60.0 * 1000.0)) - previewBeats;
-		System.out.println("Cur beat: " + currentBeat);
+		//System.out.println("Cur beat: " + currentBeat);
 		addToVisibleNotes();
 		advanceNotes();
 	}
@@ -98,6 +108,6 @@ public class SongPlayer {
 	/** Causes Judge to recalculate score, boneage, etc. based on current performance */
 
 	private void judgeMeOn(Note n) {
-		
+
 	}
 }
