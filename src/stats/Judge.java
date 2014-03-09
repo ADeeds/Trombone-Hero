@@ -35,17 +35,17 @@ public class Judge {
 		Color newColor = Color.BLUE;
 		
 		if (miss < 3) {
-			bc = 3;
+			bc = 1.5;
 			sc = 69;
 			newColor = Color.GREEN;
 		}
 		else if (miss < 5) {
-			bc = 2;
+			bc = .5;
 			sc = 34;
 			newColor = Color.YELLOW;
 		}
 		else if (miss < 8) {
-			bc = 1;
+			bc = .1;
 			sc = 1;
 			newColor = Color.RED;
 		}
@@ -54,7 +54,7 @@ public class Judge {
 			sc = -15; // ...1...1...1...freshman.
 		}
 		else {
-			bc = -6;
+			bc = -.6;
 			sc = -34; // Jeff
 		}
 		
