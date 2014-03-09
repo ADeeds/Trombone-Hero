@@ -57,6 +57,7 @@ public class Board extends JPanel implements ActionListener{
 		timer.start();
 	}
 
+	
 	public void paint(Graphics g)
 	{
 		super.paint(g);
