@@ -13,6 +13,7 @@ public class Judge {
 	Board board;
 	public int score;
 	public double boneage;
+	public double accuracy;
 	double beatOfLastUpdate;
 	
 	public Judge(Board board, SongPlayer songplayer) {
@@ -60,7 +61,7 @@ public class Judge {
 
 		// Don't increase boneage as much toward the ends of longer notes
 		// It's not much of a challenge
-		boneage += bc / ((currentBeat - startBeat) + .001) ;
+		boneage += bc / 2 * ((currentBeat - startBeat) + .001) ;
 		if (boneage < 0) boneage = 0;
 		else if (boneage > 90) {
 			sc *= 5;
