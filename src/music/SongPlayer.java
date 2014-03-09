@@ -13,13 +13,11 @@ public class SongPlayer {
 	private static float previewBeats = 16;
 	/** Number of beats for which to keep passed notes visible */
 	private static float postviewBeats = 2;
-	/** Interval by which to count */
-	private static double beatInterval = 0.1;
-	
+
 	/** Currently visible notes */
 	private ArrayList<Note> visibleNotes = new ArrayList<Note>();
 	/** Current beat of playback */
-	private double currentBeat;
+	public double currentBeat;
 	/** Index of currently iterating note */
 	private int currentNoteIndex;
 	/** State of SongPlayer */
@@ -47,9 +45,10 @@ public class SongPlayer {
 	 *  to visibleNotes
 	 */
 	private void addToVisibleNotes() {
-		while (currentBeat + previewBeats <= song.notes.get(currentNoteIndex).startBeat) {
-			visibleNotes.add(song.notes.get(currentNoteIndex));
-			currentNoteIndex++;
+		while (currentNoteIndex < song.notes.size() &&
+				currentBeat + previewBeats <= song.notes.get(currentNoteIndex).startBeat) {
+			//visibleNotes.add(song.notes.get(currentNoteIndex));
+			//currentNoteIndex++;
 		}
 	}
 	
@@ -67,7 +66,7 @@ public class SongPlayer {
 	}
 	
 	public void advanceToTime(long tot_elapsed) {
-		currentBeat = (song.tempo * tot_elapsed / (60f * 1000)) - previewBeats;
+		currentBeat = (song.tempo * tot_elapsed / (60.0 * 1000.0)) - previewBeats;
 		addToVisibleNotes();
 		advanceNotes();
 	}
