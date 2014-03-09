@@ -72,11 +72,10 @@ public class SongPlayer {
 			GuiNote n = visibleNotes.get(i);
 			if (currentBeat > n.note.startBeat + n.note.duration + postviewBeats) {
 				visibleNotes.remove(n);
-				continue;
 			}
 			else {
-				if (n.note.startBeat <= currentBeat) {
-					judgeMeOn(n.note);
+				if (n.note.startBeat <= currentBeat && n.note.startBeat + n.note.duration > currentBeat) {
+					judgeMeOn(n);
 				}
 				double start_minus_cur = n.note.startBeat - currentBeat;
 				n.x_center = (start_minus_cur)/previewBeats;
@@ -107,7 +106,7 @@ public class SongPlayer {
 
 	/** Causes Judge to recalculate score, boneage, etc. based on current performance */
 
-	private void judgeMeOn(Note n) {
+	private void judgeMeOn(GuiNote n) {
 		judge.assess(n, currentBeat);
 	}
 }
