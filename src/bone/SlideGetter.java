@@ -105,4 +105,8 @@ public class SlideGetter implements SerialPortEventListener, Runnable {
 	public void run() {
 		initialize();
 	}
+	
+	public int getCentimeters() {
+		return centimeters;
+	}
 }
