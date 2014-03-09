@@ -33,8 +33,8 @@ public class SlideStats {
 	}
 	
 	public static int getFirstOffset(int centimeters) {
-		int cur = getPositionDistance(1, centimeters);
-		if (cur < 2) cur = 0;
+		int cur = centimeters - 34;
+		if (cur < 3) cur = 0;
 		return cur;
 	}
 }
