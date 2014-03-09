@@ -14,8 +14,6 @@ import stats.Judge;
  */
 public class SongPlayer {
 
-	private Board board;
-
 	/** Number of beats to "look ahead" */
 	private static float previewBeats = 12;
 	/** Number of beats for which to keep passed notes visible */
@@ -36,7 +34,6 @@ public class SongPlayer {
 	private Song song;
 
 	public SongPlayer(Board board, Song song) {
-		this.board = board;
 		this.song = song;
 		this.state = State.STOPPED;
 		this.judge = new Judge(board, this);

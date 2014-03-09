@@ -1,6 +1,8 @@
 package stats;
 
-import gui.Board;
+import java.awt.Color;
+
+import gui.*;
 import bone.*;
 import music.*;
 
@@ -20,28 +22,32 @@ public class Judge {
 	}
 	
 	/** Given the currently-expected note, updates score and boneage */
-	public void assess(Note n, double currentBeat) {
+	public void assess(GuiNote n, double currentBeat) {
 		int miss = SlideStats.getPositionDistance(n.position, board.slide.getPosition());
-		assignPointsFor(miss, currentBeat);
+		n.color = assignPointsFor(miss, currentBeat);
 		beatOfLastUpdate = currentBeat;
 	}
 	
 	
-	private void assignPointsFor(int miss, double currentBeat) {
+	private Color assignPointsFor(int miss, double currentBeat) {
 		double bc = 0;
 		int sc = 0;
+		Color newColor = Color.BLUE;
 		
 		if (miss < 3) {
 			bc = 3;
 			sc = 69;
+			newColor = Color.GREEN;
 		}
 		else if (miss < 4) {
 			bc = 2;
 			sc = 57;
+			newColor = Color.YELLOW;
 		}
 		else if (miss < 6) {
 			bc = 1;
 			sc = 34;
+			newColor = Color.RED;
 		}
 		else if (miss < 9) {
 			bc = -.5;
@@ -62,5 +68,6 @@ public class Judge {
 		// Weight score by time elapsed since last update
 		// If it's been longer, it should be worth more points
 		score += (int) sc * (currentBeat - beatOfLastUpdate) * 34.69;
+		return newColor;
 	}
 }
