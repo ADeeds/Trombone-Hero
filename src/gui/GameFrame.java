@@ -30,9 +30,10 @@ public class GameFrame {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("Trombone Hero songs", "bone");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("Trombone Hero Song Files (.bone)", "bone");
 				final JFileChooser fc = new JFileChooser();
 				fc.setFileFilter(filter);
+				fc.setCurrentDirectory(new File("../songs"));
 				int returnVal = fc.showOpenDialog(frame);
 		        if (returnVal == JFileChooser.APPROVE_OPTION) {
 		            File file = fc.getSelectedFile();
